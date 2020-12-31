@@ -1,7 +1,6 @@
 ﻿using SpendingCalculator.Ui.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Security.Policy;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,25 +15,15 @@ using System.Windows.Shapes;
 namespace SpendingCalculator.Ui.Pages
 {
     /// <summary>
-    /// Interaction logic for HomePage.xaml
+    /// Interaction logic for NewSpendingPage.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class NewSpendingPage : Page
     {
-        public HomePage()
+        public NewSpendingPage()
         {
             InitializeComponent();
 
-            DataContext = new HomeViewModel();
-        }
-
-        private void NavigateToNewSpendingPage(object sender, RoutedEventArgs e)
-        {
-            NavigateToPage(new NewSpendingPage());
-        }
-
-        private void NavigateToPage(Page page)
-        {
-            NavigationService.Navigate(page);
+            DataContext = new NewSpendingViewModel();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SpendingCalculator.Extensions;
+using SpendingCalculator.Ui.Commands;
 using SpendingCalculator.Ui.Interfaces;
 using SpendingCalculator.Ui.Models;
 using System;
