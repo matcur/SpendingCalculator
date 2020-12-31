@@ -6,8 +6,10 @@ namespace SpendingCalculator.Ui.Models
 {
     class SpendingModel : Model
     {
-        public int Value { get; set; }
+        public int CategoryId { get; set; }
 
-        public DateTime Time { get; set; }
+        public DateTime CreatedAt { get; set; }
+        
+        public int Value { get; set; }
     }
 }

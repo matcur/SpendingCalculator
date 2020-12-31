@@ -61,6 +61,34 @@
             </Border>
         </Grid>
 
+        <Grid
+            Grid.Row="1" Grid.Column="2">
+
+            <ListView
+                ItemsSource="{Binding SpendingCategories}"
+                SelectedItem="{Binding SelectedSpendingCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                BorderBrush="Transparent">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border>
+                            <TextBlock
+                                TextAlignment="Center"
+                                VerticalAlignment="Center"
+                                Text="{Binding Name}"/>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+
         <Calendar
             Grid.Row="2" Grid.Column="1"
             DisplayMode="{Binding CalendarMode, UpdateSourceTrigger=PropertyChanged}"
