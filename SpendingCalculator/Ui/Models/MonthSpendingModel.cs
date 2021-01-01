@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace SpendingCalculator.Ui.Models
 {
-    class MonthSpendingModel : TimeSpendingModel
+    public class MonthSpendingModel : TimeSpendingModel
     {
         public MonthSpendingModel()
         {

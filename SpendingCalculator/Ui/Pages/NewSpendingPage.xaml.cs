@@ -1,4 +1,6 @@
-﻿using SpendingCalculator.Ui.ViewModels;
+﻿using SpendingCalculator.Core.Loaders;
+using SpendingCalculator.Core.Savers;
+using SpendingCalculator.Ui.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,7 +25,7 @@ namespace SpendingCalculator.Ui.Pages
         {
             InitializeComponent();
 
-            DataContext = new NewSpendingViewModel();
+            DataContext = new NewSpendingViewModel(new XmlLoader(), new XmlSaver());
         }
     }
 }

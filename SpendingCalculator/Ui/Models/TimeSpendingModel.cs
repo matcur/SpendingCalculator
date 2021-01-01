@@ -6,7 +6,7 @@ using System.Windows.Controls.Primitives;
 
 namespace SpendingCalculator.Ui.Models
 {
-    class TimeSpendingModel : Model
+    public class TimeSpendingModel : Model
     {
         public string Name { get; set; }
 

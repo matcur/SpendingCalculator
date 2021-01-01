@@ -1,10 +1,12 @@
-﻿using SpendingCalculator.Extensions;
+﻿using SpendingCalculator.Core.Interfaces;
+using SpendingCalculator.Extensions;
 using SpendingCalculator.Ui.Commands;
 using SpendingCalculator.Ui.Interfaces;
 using SpendingCalculator.Ui.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
@@ -76,7 +78,7 @@ namespace SpendingCalculator.Ui.ViewModels
 
         private List<TimeSpendingModel> timeSpendings;
 
-        private List<SpendingModel> spendings;
+        private ObservableCollection<SpendingModel> spendings;
 
         private ObservableCollection<SpendingCategoryModel> spendingCategories;
 
@@ -84,46 +86,34 @@ namespace SpendingCalculator.Ui.ViewModels
 
         private SpendingCategoryModel selectedSpendingCategory;
 
+        private readonly ILoader loader;
+
+        private readonly string spendingsFilePath = ConfigurationManager.AppSettings.Get("SpendingsFilePath");
+        
+        private readonly string spendingCategoriesFilePath = ConfigurationManager.AppSettings.Get("SpendingCategoriesFilePath");
+
         private CalendarMode calendarMode;
 
         private bool needShowCalendar = false;
 
-        public HomeViewModel()
+        public HomeViewModel(ILoader loader)
         {
-            InitializeSpendings();
-            InitializeTimeSpendings();
+            this.loader = loader;
             InitializeSpendingCategories();
+            InitializeTimeSpendings();
+            InitializeSpendings();
+
             SelectedTimeSpending = timeSpendings[3];
         }
 
         private void InitializeSpendings()
         {
-            var now = DateTime.Now;
-            spendings = new List<SpendingModel>
-            {
-                new SpendingModel { Value = 20, CreatedAt = now, CategoryId = 1 },
-                new SpendingModel { Value = 30, CreatedAt = now.AddDays(-5), CategoryId = 1 },
-                new SpendingModel { Value = 120, CreatedAt = now.AddMonths(-2), CategoryId = 1 },
-                new SpendingModel { Value = 120, CreatedAt = now.AddMonths(-2), CategoryId = 2 },
-                new SpendingModel { Value = 10, CreatedAt = now.AddDays(-28), CategoryId = 1 },
-                new SpendingModel { Value = 10, CreatedAt = now.AddDays(-28), CategoryId = 4 },
-                new SpendingModel { Value = 10, CreatedAt = now.AddDays(-28), CategoryId = 3 },
-                new SpendingModel { Value = 240, CreatedAt = now, CategoryId = 4 },
-                new SpendingModel { Value = 240, CreatedAt = now, CategoryId = 2 },
-                new SpendingModel { Value = 240, CreatedAt = now, CategoryId = 2 },
-            };
+            spendings = loader.Load<ObservableCollection<SpendingModel>>(spendingsFilePath);
         }
 
         private void InitializeSpendingCategories()
-        { 
-            spendingCategories = new ObservableCollection<SpendingCategoryModel>
-            {
-                new SpendingCategoryModel{ Name = "Транспорт", Id = 1 },
-                new SpendingCategoryModel{ Name = "Еда", Id = 2 },
-                new SpendingCategoryModel{ Name = "Досуг", Id = 3 },
-                new SpendingCategoryModel{ Name = "Кафе", Id = 4 },
-                new SpendingCategoryModel{ Name = "Прочее", Id = 5 },
-            };
+        {
+            spendingCategories = loader.Load<ObservableCollection<SpendingCategoryModel>>(spendingCategoriesFilePath);
         }
 
         private void InitializeTimeSpendings()
@@ -142,16 +132,13 @@ namespace SpendingCalculator.Ui.ViewModels
 
         private bool IsFilteredSpending(SpendingModel spending)
         {
+            if (SelectedSpendingCategory == null)
+                return true;
+
             var start = SelectedTimeSpending.Start;
             var end = SelectedTimeSpending.End;
 
             return spending.CreatedAt.IsBetween(start, end) &&
-                   DoCategoryMatch(spending);
-        }
-
-        private bool DoCategoryMatch(SpendingModel spending)
-        {
-            return SelectedSpendingCategory == null ||
                    spending.CategoryId == SelectedSpendingCategory.Id;
         }
     }

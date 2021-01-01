@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SpendingCalculator.Ui.Models
 {
-    abstract class Model : INotifyPropertyChanged
+    public abstract class Model : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 

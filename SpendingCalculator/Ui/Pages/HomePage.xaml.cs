@@ -1,4 +1,6 @@
-﻿using SpendingCalculator.Ui.ViewModels;
+﻿using SpendingCalculator.Core.Loaders;
+using SpendingCalculator.Core.Savers;
+using SpendingCalculator.Ui.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Security.Policy;
@@ -24,7 +26,7 @@ namespace SpendingCalculator.Ui.Pages
         {
             InitializeComponent();
 
-            DataContext = new HomeViewModel();
+            DataContext = new HomeViewModel(new XmlLoader());
         }
 
         private void NavigateToNewSpendingPage(object sender, RoutedEventArgs e)

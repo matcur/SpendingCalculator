@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace SpendingCalculator.Ui.Models
 {
-    class DaySpendingModel : TimeSpendingModel
+    public class DaySpendingModel : TimeSpendingModel
     {
         public DaySpendingModel()
         {

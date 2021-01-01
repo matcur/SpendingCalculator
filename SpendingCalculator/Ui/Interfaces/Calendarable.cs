@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace SpendingCalculator.Ui.Interfaces
 {
-    interface Calendarable
+    public interface Calendarable
     {
         CalendarMode CalendarMode { get; set; }
 

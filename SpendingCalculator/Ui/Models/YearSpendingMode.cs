@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace SpendingCalculator.Ui.Models
 {
-    class YearSpendingMode : TimeSpendingModel
+    public class YearSpendingMode : TimeSpendingModel
     {
         public override DateTime End 
         { 
