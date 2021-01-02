@@ -1,4 +1,5 @@
-﻿using SpendingCalculator.Core.Interfaces;
+﻿using JustSomething.Di;
+using SpendingCalculator.Core.Interfaces;
 using SpendingCalculator.Extensions;
 using SpendingCalculator.Ui.Commands;
 using SpendingCalculator.Ui.Interfaces;
@@ -86,19 +87,21 @@ namespace SpendingCalculator.Ui.ViewModels
 
         private SpendingCategoryModel selectedSpendingCategory;
 
-        private readonly ILoader loader;
-
         private readonly string spendingsFilePath = ConfigurationManager.AppSettings.Get("SpendingsFilePath");
         
         private readonly string spendingCategoriesFilePath = ConfigurationManager.AppSettings.Get("SpendingCategoriesFilePath");
 
         private CalendarMode calendarMode;
 
+        private readonly ILoader loader;
+
         private bool needShowCalendar = false;
 
-        public HomeViewModel(ILoader loader)
+        public HomeViewModel()
         {
-            this.loader = loader;
+            var di = new DiBootstrapper();
+            loader = di.Resolve<ILoader>();
+
             InitializeSpendingCategories();
             InitializeTimeSpendings();
             InitializeSpendings();

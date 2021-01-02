@@ -26,7 +26,7 @@ namespace SpendingCalculator.Ui.Pages
         {
             InitializeComponent();
 
-            DataContext = new HomeViewModel(new XmlLoader());
+            DataContext = new HomeViewModel();
         }
 
         private void NavigateToNewSpendingPage(object sender, RoutedEventArgs e)

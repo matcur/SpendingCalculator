@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SpendingCalculator.Ui.Pages"
+      xmlns:userControls="clr-namespace:SpendingCalculator.Ui.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Home">
@@ -32,28 +33,9 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <ListView
-                ItemsSource="{Binding TimeSpendings}"
-                SelectedItem="{Binding SelectedTimeSpending, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                BorderBrush="Transparent">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border>
-                            <TextBlock
-                                TextAlignment="Center"
-                                VerticalAlignment="Center"
-                                Text="{Binding Name}"/>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <userControls:TimeSpendingList 
+                SelectedTimeSpending="{Binding SelectedTimeSpending}"
+                TimeSpendings="{Binding TimeSpendings}"/>
 
             <Border
                 Grid.Row="1" Grid.Column="0">
@@ -66,28 +48,9 @@
         <Grid
             Grid.Row="1" Grid.Column="2">
 
-            <ListView
-                ItemsSource="{Binding SpendingCategories}"
-                SelectedItem="{Binding SelectedSpendingCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                BorderBrush="Transparent">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Vertical" />
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border>
-                            <TextBlock
-                                TextAlignment="Center"
-                                VerticalAlignment="Center"
-                                Text="{Binding Name}"/>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <userControls:SpendingCategoryList 
+                SpendingCategories="{Binding SpendingCategories}"
+                SelectedSpendingCategory="{Binding SelectedSpendingCategory}"/>
 
         </Grid>
 
